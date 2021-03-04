@@ -1,0 +1,12 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: Start nagios service nrpe, if not started
+    vars:
+      ansible_python_interpreter: /usr/bin/python3
+    ansible.builtin.service:
+      name: nrpe.service
+      state: started
