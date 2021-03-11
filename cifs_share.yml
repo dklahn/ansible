@@ -1,0 +1,27 @@
+---
+
+- hosts: 192.168.71.25
+  become: true
+  tasks:
+
+  - name: Create credential file (used for fstab entry)
+    copy:
+      content: |
+        username=dklahn
+        password=Chvai87t#$
+      dest: /home/dklahn/.credential
+      mode: 0600
+    become: true
+    become_user: dklahn
+
+  - name: Create fstab entry for epicshare
+    mount:
+      state: present
+      fstype: cifs
+      opts: "credentials=/home/dklahn/.credential,file_mode=0755,dir_mode=0755,user"
+      src: "//192.168.102.159/epicshare"
+      path: "/mnt/epicshare"
+
+  - name: Mount epicshare
+    shell: |
+      mount "/mnt/epicshare"
