@@ -1,0 +1,40 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: create vcastano user
+    user:
+      name: vcastano
+      comment: Vic Castanon
+      create_home: yes
+      home: /home/vcastano
+      shell: /bin/bash
+      uid: 2000
+
+  - name: create dklahn user
+    user:
+      name: dklahn
+      comment: Dale Klahn
+      create_home: yes
+      home: /home/dklahn
+      shell: /bin/bash
+      uid: 2001
+
+
+  - name: add Putty public key for dklahn
+    authorized_key:
+       user: dklahn
+       state: present
+       key: "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEA0iu7QPvF+Ij32c0MLzX36PL49DzhX4RAhuiyGZpWvSSaAlMd8FwTW/l59QCM14bxpL540aJwtZMe6yAkCOobJTQzsjw89nnRmdNE5UfyQfQEseGkH+K8zV1j555DFkPg5mgjHs2vcN/ahTkPD7lA7iqLFaPXxRZDT2H/DQ+Y8Tn5EjgOYcddmVWSvjyrGvT3WpgLgYIZV5+gtipBtpV9l69B3PHBvx1tLr6r4J/4n9v1L6jtypRm5Nr8fRrXO67mXqHyAohE28vgDZ1dJNTVlgQGwo/I/Iw1jWimcDA9ErhYtJi/CF7vz2OEuXUYxAKGIEmIkocs6X1jsZJdrhU/fw== rsa-key-20210323"
+
+  - name: create fchang user
+    user:
+      name: fchang
+      comment: Fee Chang
+      create_home: yes
+      home: /home/fchang
+      shell: /bin/bash
+      uid: 2002
+

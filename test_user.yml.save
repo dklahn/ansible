@@ -1,0 +1,34 @@
+---
+
+- hosts: nagios
+  gather_facts: no
+  become: true
+  tasks:
+
+  - name: create vcastano user
+    user:
+      name: vcastano
+      comment: Vic Castanon
+      create_home: yes
+      home: /home/vcastano
+      shell: /bin/bash
+      uid: 1013
+
+#  - name: create dklahn user
+#    user:
+#      name: dklahn
+#      comment: Dale Klahn
+#      create_home: yes
+#      home: /home/dklahn
+#      shell: /bin/bash
+#      uid: 1002
+
+  - name: create fchang user
+    user:
+      name: fchang
+      comment: Fee Chang
+      create_home: yes
+      home: /home/fchang
+      shell: /bin/bash
+      uid: 1014
+
