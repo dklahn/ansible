@@ -4,36 +4,14 @@
   become: true
   tasks:
 
-- hosts: nagios
-  become: true
-  tasks:
+  - name: Install the NTP daemon to synchronize the clocks
+    apt: name=ntp
 
-  - name: create vcastano user
-    user:
-      name: vcastano
-      comment: Vic Castanon
-      create_home: yes
-      home: /home/vcastano
-      shell: /bin/bash
-      uid: 1013
+  - name: Make susre ntp is started, and is enabled on restart
+    service: name=ntp state=started enabled=yes
 
-#  - name: create dklahn user
-#    user:
-#      name: dklahn
-#      comment: Dale Klahn
-#      create_home: yes
-#      home: /home/dklahn
-#      shell: /bin/bash
-#      uid: 1002
-
-  - name: create fchang user
-    user:
-      name: fchang
-      comment: Fee Chang
-      create_home: yes
-      home: /home/fchang
-      shell: /bin/bash
-      uid: 1014
+  - name: Set the timeone to America/Los_Angeles
+    timezone: "name=America/Los_Angeles"
 
   - name: update apt repo and cache on all Ubuntu boxes
     vars:
